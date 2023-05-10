@@ -3,9 +3,8 @@ import app from "../app";
 
 describe("root endpoint get and post", () => {
     test("get root returns 200 and data", async () => {
-        const result = await supertest(app).get("/");
-        expect(result.statusCode).toEqual(400);
-        expect(result.body.message).toBeTruthy();
+        const result = await supertest(app).get("/").set("client_id", "xxx");
+        expect(result.statusCode).toEqual(200);
     });
 
     test("post root echoes json", async () => {

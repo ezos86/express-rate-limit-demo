@@ -5,9 +5,9 @@ describe("Testing rate limits", () => {
     test("Retreive data failed due to quota exceed", async () => {
         const result = [];
         for (let i = 0; i < 7; i++) {
-            result[i] = await supertest(app).get("/");
+            result[i] = await supertest(app).get("/").set("client_id", "xxx");
         }
-        expect(result[result.length - 1].statusCode).toEqual(400);
+        expect(result[result.length - 1].statusCode).toEqual(429);
         expect(result[result.length - 1].body.message).toBeTruthy();
     });
 
